@@ -220,10 +220,7 @@
       return { subject, body: lines.join('\n') };
     };
 
-    // Send enquiry via Email - opens email app with template, NO next page
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    const sendEmail = () => {
       if (!form.reportValidity()) return;
 
       const { subject, body } = buildEnquiryData();
@@ -239,6 +236,30 @@
       if (statusMsg) {
         statusMsg.innerHTML = `✓ <strong>Opening your email app...</strong> Your enquiry details are pre-filled in the email template.<br><span style="display:inline-block;margin-top:4px">If your email app didn't launch automatically, <a href="${gmailWebUrl}" target="_blank" rel="noopener" style="color:#93c5fa;text-decoration:underline;font-weight:600">click here to send via Gmail in browser</a>.</span>`;
         statusMsg.style.display = 'block';
+      }
+    };
+
+    // Send enquiry via Email button click - NO HTTP submission
+    const sendBtn = form.querySelector('#btn-send-email') || form.querySelector('button[type="submit"]');
+    sendBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      sendEmail();
+    });
+
+    // Form submit prevention - guarantees NO HTTP 405 error on static hosts
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      sendEmail();
+      return false;
+    });
+
+    // Enter key handling
+    form.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        sendEmail();
       }
     });
 
