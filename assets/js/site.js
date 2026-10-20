@@ -173,62 +173,71 @@
     });
   });
 
-  // ── Mailto form submission (no backend needed) ───────────────────────────
-  document.querySelectorAll('form[data-mailto-form]').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+  // ── Enquiry Form Handlers (Gmail & WhatsApp) ───────────────────────────
+  document.querySelectorAll('form[data-enquiry-form], form[data-mailto-form]').forEach(form => {
+    const buildEnquiryData = () => {
       const d = new FormData(form);
       const get = (k) => (d.get(k) || '').toString().trim();
+      const name = get('name');
+      const company = get('company');
+      const country = get('country');
+      const email = get('email');
+      const phone = get('phone');
+      const product = get('product');
+      const volume = get('volume');
+      const destination = get('destination');
+      const spec = get('specification');
+      const message = get('message');
 
-      const subject = encodeURIComponent(
-        `Export Enquiry – ${get('product') || 'Seafood'} | ${get('company') || get('name')}`
-      );
+      const subject = `Export Enquiry – ${product || 'Seafood'} | ${company || name}`;
 
-      const body = encodeURIComponent([
+      const lines = [
         'Hello Mahadev Marine Exports,',
         '',
         'I would like to submit the following export enquiry:',
         '',
-        `Name            : ${get('name')}`,
-        `Company         : ${get('company')}`,
-        `Country         : ${get('country')}`,
-        `Email           : ${get('email')}`,
-        `Phone/WhatsApp  : ${get('phone')}`,
-        `Product/Service : ${get('product')}`,
-        `Est. Volume     : ${get('volume')}`,
-        `Destination     : ${get('destination')}`,
-        `Specification   : ${get('specification')}`,
+        `Name            : ${name}`,
+        `Company         : ${company}`,
+        `Country         : ${country}`,
+        `Email           : ${email}`,
+        `Phone/WhatsApp  : ${phone}`,
+        `Product/Service : ${product}`,
+        `Est. Volume     : ${volume}`,
+        `Destination     : ${destination}`,
+        `Specification   : ${spec}`,
         '',
-        'Additional details:',
-        get('message'),
+        'Additional details / requirements:',
+        message || 'N/A',
         '',
         'Regards,',
-        get('name')
-      ].join('\n'));
+        name
+      ];
 
-      window.location.href =
-        `mailto:enquiry@mahadevmarineexports.com?subject=${subject}&body=${body}`;
+      return { subject, body: lines.join('\n') };
+    };
+
+    // Send via Gmail
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const { subject, body } = buildEnquiryData();
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=enquiry@mahadevmarineexports.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      const newWin = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+        window.location.href = gmailUrl;
+      }
     });
-  });
 
-  // ── WhatsApp quick-send ──────────────────────────────────────────────────
-  document.querySelectorAll('form[data-whatsapp-form]').forEach(form => {
+    // Send via WhatsApp
     const waButton = form.querySelector('[data-send-whatsapp]');
     waButton?.addEventListener('click', () => {
-      const data = new FormData(form);
-      const lines = [
-        'Hello Mahadev Marine Exports,',
-        '',
-        'I would like an export quotation for seafood, agro products or shrimp byproducts.',
-        `Name: ${data.get('name') || ''}`,
-        `Company: ${data.get('company') || ''}`,
-        `Country: ${data.get('country') || ''}`,
-        `Product: ${data.get('product') || ''}`,
-        `Volume: ${data.get('volume') || ''}`,
-        `Specification: ${data.get('specification') || ''}`,
-        `Message: ${data.get('message') || ''}`
-      ];
-      window.open(`https://wa.me/919059861256?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
+      if (!form.reportValidity()) return;
+
+      const { body } = buildEnquiryData();
+      const waUrl = `https://wa.me/919059861256?text=${encodeURIComponent(body)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     });
   });
 })();
