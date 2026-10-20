@@ -173,7 +173,7 @@
     });
   });
 
-  // ── Enquiry Form Handlers (Gmail & WhatsApp) ───────────────────────────
+  // ── Enquiry Form Handlers (Email & WhatsApp) ───────────────────────────
   document.querySelectorAll('form[data-enquiry-form], form[data-mailto-form]').forEach(form => {
     const buildEnquiryData = () => {
       const d = new FormData(form);
@@ -189,26 +189,30 @@
       const spec = get('specification');
       const message = get('message');
 
-      const subject = `Export Enquiry – ${product || 'Seafood'} | ${company || name}`;
+      const subject = `Export Enquiry: ${product || 'Seafood'} | ${company || name}`;
 
       const lines = [
-        'Hello Mahadev Marine Exports,',
+        '========================================',
+        'EXPORT ENQUIRY - MAHADEV MARINE EXPORTS',
+        '========================================',
         '',
-        'I would like to submit the following export enquiry:',
+        'BUYER & ENQUIRY DETAILS:',
+        `• Name            : ${name}`,
+        `• Company         : ${company}`,
+        `• Country         : ${country}`,
+        `• Email           : ${email}`,
+        `• Phone / WhatsApp: ${phone || 'N/A'}`,
         '',
-        `Name            : ${name}`,
-        `Company         : ${company}`,
-        `Country         : ${country}`,
-        `Email           : ${email}`,
-        `Phone/WhatsApp  : ${phone}`,
-        `Product/Service : ${product}`,
-        `Est. Volume     : ${volume}`,
-        `Destination     : ${destination}`,
-        `Specification   : ${spec}`,
+        'REQUIREMENT SPECIFICATIONS:',
+        `• Product/Service : ${product}`,
+        `• Est. Volume     : ${volume || 'N/A'}`,
+        `• Destination Port: ${destination || 'N/A'}`,
+        `• Specification   : ${spec || 'Standard specification'}`,
         '',
-        'Additional details / requirements:',
-        message || 'N/A',
+        'ADDITIONAL REQUIREMENT / MESSAGE:',
+        message || 'None provided',
         '',
+        '========================================',
         'Regards,',
         name
       ];
@@ -216,23 +220,32 @@
       return { subject, body: lines.join('\n') };
     };
 
-    // Send via Gmail
+    // Send enquiry via Email - opens email app with template, NO next page
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       if (!form.reportValidity()) return;
 
       const { subject, body } = buildEnquiryData();
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=enquiry@mahadevmarineexports.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const to = 'enquiry@mahadevmarineexports.com';
+      const mailtoUrl = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      const newWin = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
-        window.location.href = gmailUrl;
+      // Open email client pre-filled with the template
+      window.location.href = mailtoUrl;
+
+      // Show inline feedback on the same page (no navigation)
+      const statusMsg = form.querySelector('#form-status-msg');
+      if (statusMsg) {
+        statusMsg.innerHTML = `✓ <strong>Opening your email app...</strong> Your enquiry details are pre-filled in the email template.<br><span style="display:inline-block;margin-top:4px">If your email app didn't launch automatically, <a href="${gmailWebUrl}" target="_blank" rel="noopener" style="color:#93c5fa;text-decoration:underline;font-weight:600">click here to send via Gmail in browser</a>.</span>`;
+        statusMsg.style.display = 'block';
       }
     });
 
     // Send via WhatsApp
     const waButton = form.querySelector('[data-send-whatsapp]');
-    waButton?.addEventListener('click', () => {
+    waButton?.addEventListener('click', (e) => {
+      e.preventDefault();
       if (!form.reportValidity()) return;
 
       const { body } = buildEnquiryData();
