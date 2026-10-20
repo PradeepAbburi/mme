@@ -220,58 +220,46 @@
       return { subject, body: lines.join('\n') };
     };
 
-    const sendEmail = () => {
-      if (!form.reportValidity()) return;
+    // Send enquiry via Mailto button (<a> link with href="mailto:...")
+    const mailtoBtn = form.querySelector('#btn-send-email');
+    mailtoBtn?.addEventListener('click', (e) => {
+      if (!form.reportValidity()) {
+        e.preventDefault();
+        return;
+      }
 
       const { subject, body } = buildEnquiryData();
       const to = 'enquiry@mahadevmarineexports.com';
       const mailtoUrl = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      // Open email client pre-filled with the template
-      window.location.href = mailtoUrl;
+      mailtoBtn.href = mailtoUrl;
 
       // Show inline feedback on the same page (no navigation)
       const statusMsg = form.querySelector('#form-status-msg');
       if (statusMsg) {
-        statusMsg.innerHTML = `✓ <strong>Opening your email app...</strong> Your enquiry details are pre-filled in the email template.<br><span style="display:inline-block;margin-top:4px">If your email app didn't launch automatically, <a href="${gmailWebUrl}" target="_blank" rel="noopener" style="color:#93c5fa;text-decoration:underline;font-weight:600">click here to send via Gmail in browser</a>.</span>`;
+        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        statusMsg.innerHTML = `✓ <strong>Opening your email app (mailto:)...</strong> Your enquiry template is pre-filled.<br><span style="display:inline-block;margin-top:4px">If your email client didn't launch automatically, <a href="${gmailWebUrl}" target="_blank" rel="noopener" style="color:#93c5fa;text-decoration:underline;font-weight:600">click here to send via Gmail in browser</a>.</span>`;
         statusMsg.style.display = 'block';
       }
-    };
-
-    // Send enquiry via Email button click - NO HTTP submission
-    const sendBtn = form.querySelector('#btn-send-email') || form.querySelector('button[type="submit"]');
-    sendBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      sendEmail();
     });
 
-    // Form submit prevention - guarantees NO HTTP 405 error on static hosts
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      sendEmail();
-      return false;
-    });
-
-    // Enter key handling
+    // Enter key handling on text inputs
     form.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
         e.preventDefault();
-        sendEmail();
+        mailtoBtn?.click();
       }
     });
 
     // Send via WhatsApp
     const waButton = form.querySelector('[data-send-whatsapp]');
     waButton?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
+      if (!form.reportValidity()) {
+        e.preventDefault();
+        return;
+      }
 
       const { body } = buildEnquiryData();
-      const waUrl = `https://wa.me/919059861256?text=${encodeURIComponent(body)}`;
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      waButton.href = `https://wa.me/919059861256?text=${encodeURIComponent(body)}`;
     });
   });
 })();
