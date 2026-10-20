@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /private-admin/
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Add the final absolute sitemap URL after connecting the production domain.

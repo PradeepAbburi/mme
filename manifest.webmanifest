@@ -1,0 +1,15 @@
+{
+  "name": "Mahadev Marine Exports Pvt. Ltd.",
+  "short_name": "Mahadev Marine",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03101e",
+  "theme_color": "#03101e",
+  "icons": [
+    {
+      "src": "assets/images/brand/app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

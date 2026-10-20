@@ -1,0 +1,22 @@
+MAHADEV MARINE EXPORTS — SEO & AI SEARCH DEPLOYMENT CHECKLIST
+
+1. Connect the final domain and run tools/configure_domain.py to update canonical URLs and create sitemap.xml.
+2. Submit sitemap.xml in Google Search Console and Bing Webmaster Tools.
+3. Verify the business identity, official email, telephone, corporate address and corporate address.
+4. Keep GACC, US FDA, EU, BRCGS, HACCP, ISO 22000, ASC and export-house claims limited to valid certificate scope, product and destination market.
+5. Maintain the seafood sourcing and procurement positioning consistently across the homepage, About page, contact forms, business profiles and social channels.
+6. Publish useful buyer content around seafood sourcing India, shrimp procurement, buyer representation, processor selection, quality coordination, export documents and reefer logistics.
+7. Keep llms.txt and llms-full.txt current when services, products, contacts or compliance details change.
+8. Keep robots.txt open to search crawlers and AI-search crawlers unless business policy changes.
+9. Use original product, processing and team images wherever available and maintain accurate alt text.
+10. Review structured data with Google Rich Results Test after the production domain is connected.
+
+Primary target themes:
+- seafood sourcing company India
+- seafood procurement partner India
+- seafood buyer representation India
+- Vannamei shrimp sourcing India
+- Black Tiger shrimp procurement India
+- seafood processor identification India
+- seafood quality coordination India
+- seafood export documentation and reefer logistics
