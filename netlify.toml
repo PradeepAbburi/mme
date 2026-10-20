@@ -20,3 +20,15 @@
   [headers.values]
     Content-Type = "text/plain; charset=UTF-8"
     Cache-Control = "public, max-age=86400"
+
+[[redirects]]
+  from = "/success"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/success.html"
+  to = "/contact"
+  status = 301
+  force = true

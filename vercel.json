@@ -1,5 +1,17 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/success",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/success.html",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ]
 }
