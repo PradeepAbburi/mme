@@ -21,7 +21,7 @@ BEFORE PUBLIC LAUNCH
 - Test email, phone and WhatsApp links.
 
 CONTACT DETAILS CURRENTLY USED
-Email: mahadevmarineexports@gmail.com
+Email: enquires@mahadevmarineexports.com
 Primary phone / WhatsApp: +91 90598 61256
 Corporate office: Kakinada City, Andhra Pradesh, India
 

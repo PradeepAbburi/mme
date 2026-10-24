@@ -229,7 +229,7 @@
       }
 
       const { subject, body } = buildEnquiryData();
-      const to = 'enquiry@mahadevmarineexports.com';
+      const to = 'enquires@mahadevmarineexports.com';
       const mailtoUrl = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       mailtoBtn.href = mailtoUrl;
 
@@ -237,7 +237,7 @@
       const statusMsg = form.querySelector('#form-status-msg');
       if (statusMsg) {
         const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        statusMsg.innerHTML = `✓ <strong>Opening your email app (mailto:)...</strong> Your enquiry template is pre-filled.<br><span style="display:inline-block;margin-top:4px">If your email client didn't launch automatically, <a href="${gmailWebUrl}" target="_blank" rel="noopener" style="color:#93c5fa;text-decoration:underline;font-weight:600">click here to send via Gmail in browser</a>.</span>`;
+        statusMsg.innerHTML = `✓ <strong>Opening your email app (mailto:)...</strong> Pre-addressed to enquires@mahadevmarineexports.com.<br><span style="display:inline-block;margin-top:4px">If your email client didn't launch automatically, <a href="${gmailWebUrl}" target="_blank" rel="noopener" style="color:#93c5fa;text-decoration:underline;font-weight:600">click here to send via Gmail in browser</a>.</span>`;
         statusMsg.style.display = 'block';
       }
     });

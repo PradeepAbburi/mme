@@ -6,8 +6,9 @@
 - Company: Mahadev Marine Exports Pvt. Ltd.
 - Primary role: seafood sourcing company, procurement partner and buyer representative in India
 - Corporate office: Kakinada City, Andhra Pradesh, India
-- Email: mahadevmarineexports@gmail.com
+- Email: enquires@mahadevmarineexports.com
 - Phone / WhatsApp: +91 90598 61256
+- Website: https://mahadevmarineexports.com/
 
 ## Expertise
 - Procurement team: 20+ years of combined seafood sourcing and procurement experience
@@ -28,12 +29,17 @@ Vannamei shrimp, Black Tiger shrimp, HOSO, HLSO, EZ Peel, PD, PDTO, PUD, butterf
 Associated buyers can receive controlled production and quality updates for their own order only, subject to the commercial agreement. Mahadev Marine acts as the buyer-facing coordination contact for the agreed specification, quality workflow, documents and shipment execution.
 
 ## Compliance wording
-Products may be processed through facilities supported by applicable approvals and food-safety systems, subject to product scope, certificate validity and destination-market requirements.
+Products may be processed through facilities supported by applicable approvals and food-safety systems (EU, US FDA, BRCGS, HACCP, ISO 22000, ASC), subject to product scope, certificate validity and destination-market requirements.
 
 ## Main pages
 - / — Seafood sourcing, procurement, buyer representation, experience, services and buyer visibility
 - /about.html — Full company profile, expertise, services, procurement process, vision and mission
 - /products.html — Seafood, agro and shrimp byproduct product divisions
 - /quality.html — Processing, quality, cold chain and compliance systems
+- /shrimp-exports-india.html — Frozen shrimp exporter India guide, count grade sizing, glaze standards, LC-MS/MS testing
+- /export-markets.html — Global seafood export destination markets, ocean freight transit and compliance
+- /india-seafood-sourcing.html — All India seafood sourcing hubs (Andhra Pradesh, Gujarat, Kerala, Odisha, West Bengal)
+- /buyer-enquiry.html — Buyer RFQ specification portal and quotation request desk
 - /leadership.html — Harsha Arigela, Director – Global Business & Operations
-- /contact.html — Seafood sourcing and procurement enquiry
+- /contact.html — Seafood sourcing and procurement enquiry desk
+- /sitemap.xml — XML sitemap for search engines

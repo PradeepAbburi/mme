@@ -20,4 +20,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-# Add the final absolute sitemap URL after connecting the production domain.
+Sitemap: https://mahadevmarineexports.com/sitemap.xml
